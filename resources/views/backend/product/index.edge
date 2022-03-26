@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Category List</title>
+  <title>Product List</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -11,39 +11,32 @@
 <body>
 
 <div class="container">
-  <h2>Category List</h2>
-  <a href="{{route('categories.create')}}" type="button" class="btn btn-success">Add New</a>
+  <h2>Product List</h2>
+  <a href="{{route('products.create')}}" type="button" class="btn btn-success">Add New</a>
   <table class="table">
     <thead>
       <tr>
         <th>Title</th>
-        <th>Slug</th>
-        <th>icon</th>
+        <th>price</th>
+        <th>description</th>
         <th>Status</th>
+        <th>category</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-
-      {{--  @each((category, index) in categories)
+      @each((product,index) in products)
       <tr>
-        <td>{{category.title}}</td>
-        <td>{{category.slug}}</td>
-        <td>{{category.icon}}</td>
-        <td>Edit</td>
-      </tr>
-      @endeach  --}}
-      @each((category,index) in categories)
-      <tr>
-        <td>{{ category ? category.title : 'N/A'}}</td>
-        <td>{{ category ? category.slug : 'N/A'}}</td>
-        <td>{{ category ? (category.icon == null ? 'No icon Avaiable ': 'N/A') : 'N/A'}}</td>
-        <td><button type="button" class="btn btn-success">{{ category.status === 0 ? 'Active': 'Inactive'}}</button></td>
-        <td><a href="{{route('categories.edit', {id:category.id})}}" type="button" class="btn btn-success">Edit</a></td>
+        <td>{{ product ? product.title : 'N/A'}}</td>
+        <td>{{ product ? product.price : 'N/A'}}</td>
+        <td>{{ product ? (product.description == null ? 'No icon Avaiable ': 'N/A') : 'N/A'}}</td>
+        <td>{{ product ? product.category_id : 'N/A'}}</td>
+        <td><button type="button" class="btn btn-success">{{ product.status === 0 ? 'Active': 'Inactive'}}</button></td>
+        <td><a href="{{route('products.edit', {id:product.id})}}" type="button" class="btn btn-success">Edit</a></td>
         <td>
         
           <form
-          action="/categories/{{category.id}}?_method=delete"
+          action="/products/{{product.id}}?_method=delete"
           method="POST"
         >
           <button class="btn btn-danger">Delete</button>
