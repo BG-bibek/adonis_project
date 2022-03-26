@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Category List</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Category List</h2>
+  <a href="{{route('categories.create')}}" type="button" class="btn btn-success">Add New</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Slug</th>
+        <th>icon</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {{--  @each((category, index) in categories)
+      <tr>
+        <td>{{category.title}}</td>
+        <td>{{category.slug}}</td>
+        <td>{{category.icon}}</td>
+        <td>Edit</td>
+      </tr>
+      @endeach  --}}
+      @each((category,index) in categories)
+      <tr>
+        <td>{{ category ? category.title : 'N/A'}}</td>
+        <td>{{ category ? category.slug : 'N/A'}}</td>
+        <td>{{ category ? (category.icon == null ? 'No icon Avaiable ': 'N/A') : 'N/A'}}</td>
+        <td><button type="button" class="btn btn-success">{{ category.status === 0 ? 'Active': 'Inactive'}}</button></td>
+        <td><a href="{{route('categories.edit', {id:category.id})}}" type="button" class="btn btn-success">Edit</a></td>
+        <td>
+        
+          <form
+          action="/categories/{{category.id}}?_method=delete"
+          method="POST"
+        >
+          <button class="btn btn-danger">Delete</button>
+        </form>
+        
+        </td>
+     
+      </tr>
+      @endeach
+    </tbody>
+  </table>
+</div>
+<script>
+  function myFunction() {
+  document.getElementById("demo").innerHTML = "Hello World";
+}
+</script>
+</body>
+</html>
